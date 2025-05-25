@@ -18,17 +18,17 @@ if due_date1 >= now:
 
     edge_driver_path = "msedgedriver.exe"  
 
-    # Tạo trình duyệt Edge
+    # Open Edge browser
     service = EdgeService(executable_path=edge_driver_path)
     options = webdriver.EdgeOptions()
     options.add_argument("--start-maximized")
     options.add_experimental_option("detach", True)
     driver = webdriver.Edge(service=service, options=options)
 
-    # Wait "enter"
+    # Wait "backspace"
     keyboard.wait("backspace")
 
-    # Phân tích nội dung
+    # Get "words" list
     html = driver.page_source
     soup = BeautifulSoup(html, "html.parser")
     spans = soup.select("div.content-display span")
@@ -40,7 +40,7 @@ if due_date1 >= now:
     for i in range(len(a)):
         span_list[a[i]] = random.choice(string.ascii_letters)
 
-    # Gõ bằng bàn phím vật lý
+    # Simulate physical keyboard
     pyautogui.FAILSAFE = False
     for i in range(100):
         if keyboard.is_pressed("enter"):
