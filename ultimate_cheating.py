@@ -26,8 +26,6 @@ while True:
         mouse.wait("left")
         x2, y2 = pyautogui.position()
         time.sleep(1)
-
-        # Tính toán region
         left = min(x1, x2)
         top = min(y1, y2)
         width = abs(x2 - x1)
@@ -40,10 +38,10 @@ while True:
         screenshot.save("image.png")
 
 
-        # Mở ảnh
+        # open image
         img = Image.open('image.png')
 
-        # Chuyển ảnh thành text
+        # Covert image to texts
         text = pytesseract.image_to_string(img, lang='eng')  # 'eng' là ngôn ngữ tiếng Anh
         text = text.replace('\n',' ')
         words = text.split(" ")
@@ -53,7 +51,7 @@ while True:
         for i in range(len(a)):
             words[a[i]] = random.choice(string.ascii_letters)
 
-        # Stimulate physical keyboard
+        # Simulate physical keyboard
         keyboard.wait("backspace")
         pyautogui.FAILSAFE = False
         for i in range(100):
